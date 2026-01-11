@@ -30,11 +30,11 @@ Create a Next.js app:
 npx create-next-app@latest my-app
 ```
 Tailwind Config Issue (Local Dev)
- *  In some local environments (e.g. VS Code), tailwind.config.ts may not be generated.
+ *  In some local environments (e.g. VS Code), `tailwind.config.ts` may not be generated.
 
 Workaround
   1. Create the Next.js app on StackBlitz
-  2. Ensure tailwind.config.ts is generated
+  2. Ensure `tailwind.config.ts` is generated
   3. Push it to GitHub
   4. Clone the repo to your local machine
 
@@ -46,10 +46,10 @@ npx create-next-app@latest shared-library
 ```
 
 When prompted:
-* Use src/ directory? → Yes
+* Use `src/` directory? → Yes
 
 Setup Tailwind
-  1. Copy tailwind.config.ts from my-app to shared-library
+  1. Copy `tailwind.config.ts` from `my-app` to `shared-library`
   2. Install Tailwind dependencies:
 ```
 cd shared-library
@@ -62,7 +62,7 @@ Install shadcn/ui (Manual)
 Follow the official guide:
 https://ui.shadcn.com/docs/installation/manual
 
-Update tsconfig.json
+Update `tsconfig.json`
 ```
 {
   "compilerOptions": {
@@ -117,5 +117,47 @@ Create Root Export File
 export * from "./components/ui"
 ```
 Important Notes
-* Always use relative imports inside shared-library
-* Update src/components/ui/button.tsx to use relative imports for utils.ts
+* Always use relative imports inside `shared-library`
+* Update `src/components/ui/button.tsx` to use relative imports for `utils.ts`
+
+# Step 4: Connect shared-library to my-app
+Add Dependency
+`my-app/package.json`
+```
+{
+  "dependencies": {
+    "@shared/ui": "workspace:*"
+  }
+}
+```
+Update Tailwind Content Paths
+`my-app/tailwind.config.ts`
+```
+content: [
+  "./src/**/*.{ts,tsx}",
+  "../shared-library/src/**/*.{ts,tsx}"
+]
+```
+Update TypeScript Paths
+`my-app/tsconfig.json`
+From:
+```
+{
+  "paths": {
+    "@/*": ["./*"]
+  }
+}
+```
+To:
+```
+{
+  "paths": {
+    "@shared/ui": ["../shared-library/src"]
+  }
+}
+```
+
+# Step 5: Use Shared Components in my-app
+```
+import { Button } from "@shared/ui"
+```
