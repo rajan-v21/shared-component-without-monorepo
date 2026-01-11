@@ -51,6 +51,7 @@ When prompted:
 Setup Tailwind
   1. Copy `tailwind.config.ts` from `my-app` to `shared-library`
   2. Install Tailwind dependencies:
+     
 ```
 cd shared-library
 npm install -D tailwindcss postcss autoprefixer
@@ -63,6 +64,7 @@ Follow the official guide:
 https://ui.shadcn.com/docs/installation/manual
 
 Update `tsconfig.json`
+
 ```
 {
   "compilerOptions": {
@@ -70,7 +72,9 @@ Update `tsconfig.json`
   }
 }
 ```
+
 Create Required Files & Folders
+
 ```
 shared-library/
 ├─ components.json
@@ -82,16 +86,22 @@ shared-library/
 │  ├─ components/
 │  │  └─ ui/
 ```
+
 Add shadcn Button Component
+
 ```
 npx shadcn@latest add button
 ```
+
 Export Components
+
 `src/components/ui/index.ts`
 ```
 export * from "./button"
 ```
+
 Update Path Aliases
+
 Change `tsconfig.json`
 
 From:
@@ -111,17 +121,22 @@ To:
   }
 }
 ```
+
 Create Root Export File
+
 `src/index.ts`
 ```
 export * from "./components/ui"
 ```
+
 Important Notes
 * Always use relative imports inside `shared-library`
 * Update `src/components/ui/button.tsx` to use relative imports for `utils.ts`
 
 # Step 4: Connect shared-library to my-app
+
 Add Dependency
+
 `my-app/package.json`
 ```
 {
@@ -130,7 +145,9 @@ Add Dependency
   }
 }
 ```
+
 Update Tailwind Content Paths
+
 `my-app/tailwind.config.ts`
 ```
 content: [
@@ -138,8 +155,11 @@ content: [
   "../shared-library/src/**/*.{ts,tsx}"
 ]
 ```
+
 Update TypeScript Paths
+
 `my-app/tsconfig.json`
+
 From:
 ```
 {
@@ -148,6 +168,7 @@ From:
   }
 }
 ```
+
 To:
 ```
 {
