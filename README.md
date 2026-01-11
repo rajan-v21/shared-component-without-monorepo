@@ -1,25 +1,39 @@
-# shared component using tailwind and shadcn without monorepo
-NOTE: This setup is as per nextjs 15.
+# Shared UI Component Library with Tailwind & shadcn (No Monorepo)
 
-Step 1: Create next.js app.
-  Note - Local dev (vs code) might not generate "tailwind.config.ts" file.
-  Solution - a) Create Next.js app on Stackblitz
-            b) this generates "tailwind.config.ts"
-            c) create repo of it on github and clone it on local environment.
+This guide explains how to create and consume a **shared UI component library** using **Tailwind CSS** and **shadcn/ui** without a monorepo, compatible with **Next.js 15**.
 
+---
 
-Step 2: Create another app "shared-library" on local environment and while choosing option to create app,
-  For option - "inside 'src/directory'" choose "yes".
-  a) copy tailwind file from previous app to shared-library.
-  b) then in terminal run 'cd shared-library'.
-  c) then do 'npm install -D tailwindcss postcss autoprefixer'
+## Tech Stack
 
-Step 3: Now tailwind is in your shared-library
-  a) Install shadcn manually from [shadcn](https://ui.shadcn.com/docs/installation/manual) 
-  b) In tsconfig.json add 
-        "compilerOptions": {
-          ...
-          "baseUrl": ".",
-          ...
-        },
-  c) In `src/styles/` create `global.css`
+- Next.js 15
+- Tailwind CSS
+- shadcn/ui
+- TypeScript
+- Workspace-based dependency linking
+
+---
+
+## Project Structure
+
+```txt
+root/
+├─ my-app/              # Main Next.js application
+└─ shared-library/      # Shared UI component library
+
+```
+
+#Step 1: Create the Main App (my-app)
+
+Create a Next.js app:
+```
+npx create-next-app@latest my-app
+```
+Tailwind Config Issue (Local Dev)
+ *  In some local environments (e.g. VS Code), tailwind.config.ts may not be generated.
+
+Workaround
+  1. Create the Next.js app on StackBlitz
+  2. Ensure tailwind.config.ts is generated
+  3. Push it to GitHub
+  4. Clone the repo to your local machine
